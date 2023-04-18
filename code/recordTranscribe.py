@@ -96,7 +96,6 @@ def transcribeFile(file_name, config):
             print('Transcript: {}'.format(result.alternatives[0].transcript))
 
 
-transcribeFile(recording_loud, wavConfig)
 
 
 async def main():
@@ -122,5 +121,7 @@ async def main():
             print('Wake word %s detected. Starting transcription...' % wake_word)
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
+
+transcribeFile(recording_loud, wavConfig)
