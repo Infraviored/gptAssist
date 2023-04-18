@@ -1,0 +1,17 @@
+numba
+numpy
+torch
+tqdm
+more-itertools
+tiktoken==0.3.1
+ffmpeg-python==0.2.0
+openai
+asyncio
+regex
+boto3
+pydub
+SpeechRecognition
+EdgeGPT
+pushbullet.py
+pyaudio
+git+https://github.com/openai/whisper.git 
