@@ -2,8 +2,9 @@ import io
 import os
 import configparser
 
-from google.cloud import speech
+
 from google.oauth2 import service_account
+from google.cloud import speech
 
 
 
@@ -28,18 +29,16 @@ openaiKey= config['API Keys']['openai']
 
 
 # Path to your service account key file
-key_path = os.path.join(configDir, "google2.json")
+keyFile = os.path.join(configDir, "google2.json")
 
 
 
 # Instantiates a client using your service account key file
-credentials = service_account.Credentials.from_service_account_file(key_path)
+credentials = service_account.Credentials.from_service_account_file(keyFile)
 client = speech.SpeechClient(credentials=credentials)
 
 # The name of the audio file to transcribe
-file_name = os.path.join(
-    os.path.dirname(__file__),
-    'recording_loud.wav')
+file_name = 'recording_loud.wav'
 
 # Loads the audio into memory
 with io.open(file_name, 'rb') as audio_file:
@@ -49,7 +48,7 @@ with io.open(file_name, 'rb') as audio_file:
 # Configuration for the audio file
 config = speech.RecognitionConfig(
     encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-    sample_rate_hertz=16000,
+    sample_rate_hertz=44100,
     language_code='en-US')
 
 # Detects speech in the audio file

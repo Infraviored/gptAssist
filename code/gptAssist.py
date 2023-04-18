@@ -1,7 +1,6 @@
 import openai
 import asyncio
 import re
-import whisper
 import boto3
 import pydub
 from pydub import playback
