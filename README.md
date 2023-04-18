@@ -1,9 +1,10 @@
-GPT Based Voice Assistant in the making
+# GPT Based Voice Assistant in the making
 
-create Environment
+## Create Virtual Environment
 pyhton -m venv gptAssistEnv
 
-# Activate the virtual environment
+## Activate the virtual environment
 source gptassist/gptAssistEnv/bin/activate
-# Install required packages
+
+## Install required packages
 pip install -r gptAssistEnv/requirements.txt  
