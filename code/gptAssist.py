@@ -142,6 +142,11 @@ def get_wake_word(phrase):
     else:
         return None
     
+def get_stop_word(phrase):
+    for j in ("stop", "stopp", "stoppit", "stopp it"):
+        if j in phrase.lower():
+            return True
+    
 
 
 # Use the default microphone as the audio source
@@ -208,23 +213,24 @@ async def main():
             print('Wake word %s detected.' % wake_word)
             
             if wake_word == BingWakeword:
-                play_audio("BingC.wav")
+                play_audio(os.path.join(audioDir, "BingC.wav"))
             if wake_word == JarvisWakeword:
-                play_audio("JarvisE.wav")
+                play_audio(os.path.join(audioDir, "JarvisE.wav"))
 
             if wake_word == BingWakeword:
+                
                 transcript = ""
                 while not transcript == "stop":
-                    audio = recognizer.listen(source)
                     print("Speak a prompt...")
+                    audio = recognizer.listen(source)
                     try:
-                        with open("audio_prompt.wav", "wb") as f:
+                        with open(os.path.join(audioDir, "audio_prompt.wav"), "wb") as f:
                             f.write(audio.get_wav_data())
                     except Exception as e:
                         print(e)
 
-                    transcript = speech_to_text_cloud("audio_prompt.wav")
-                    if transcript == "stop" or transcript == None:
+                    transcript = speech_to_text_cloud(os.path.join(audioDir, "audio_prompt.wav"))
+                    if get_stop_word(transcript) or transcript == None:
                         pass
                     else:
                         bot = Chatbot(cookies=bingCookie)
@@ -233,8 +239,8 @@ async def main():
                             if message["author"] == "bot":
                                 bot_response = message["text"]
                                 print(bot_response)
-                                text_to_speech(assistifyString(bot_response), "bing_response.wav", "C")
-                                play_audio("bing_response.wav")
+                                text_to_speech(assistifyString(bot_response), os.path.join(audioDir, "audio_prompt.wav"), "C")
+                                play_audio(os.path.join(audioDir, "audio_prompt.wav"))
                                 break
                             
 
